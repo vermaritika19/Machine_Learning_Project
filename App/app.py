@@ -47,6 +47,8 @@ def predict():
             if value is None or str(value).strip() == "":
                 return jsonify(error=f"Please enter {col}."), 400
             value = float(value)
+            if col == "Area" and value <= 1:
+                return jsonify(error="Area must be greater than 1."), 400
             if value < 0:
                 return jsonify(error=f"{col} cannot be negative."), 400
             row[col] = value
@@ -57,7 +59,7 @@ def predict():
             row[col] = str(value).strip()
 
         input_df = pd.DataFrame([row], columns=FEATURES)
-        prediction = float(model.predict(input_df)[0])
+        prediction = float(model.predict(input_df)[0])*1e5
         return jsonify(predicted_price=round(prediction, 2))
     except ValueError:
         return jsonify(error="Please enter valid numeric values."), 400
