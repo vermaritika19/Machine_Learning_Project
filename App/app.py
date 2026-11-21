@@ -5,7 +5,7 @@ from flask import Flask, jsonify, render_template, request
 
 APP_DIR = Path(__file__).resolve().parent
 PROJECT_DIR = APP_DIR.parent
-MODEL_PATH = PROJECT_DIR / "Models" / "linear_regression_model.pkl"
+MODEL_PATH = PROJECT_DIR / "Models" / "best_model.pkl"
 RAW_DATA_DIR = PROJECT_DIR / "Data" / "Raw"
 
 FEATURES = ["Location", "Area", "BHK", "Floor", "Balconies", "Property Age",
